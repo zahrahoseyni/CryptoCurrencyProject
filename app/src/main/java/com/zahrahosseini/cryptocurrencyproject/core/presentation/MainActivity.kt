@@ -1,4 +1,4 @@
-package com.zahrahosseini.cryptocurrencyproject.ui.activities
+package com.zahrahosseini.cryptocurrencyproject.core.presentation
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
