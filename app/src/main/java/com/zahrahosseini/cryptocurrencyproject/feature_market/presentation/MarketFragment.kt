@@ -9,8 +9,11 @@ import androidx.compose.ui.platform.ComposeView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import com.zahrahosseini.cryptocurrencyproject.core.utils.handleExceptions
+import com.zahrahosseini.cryptocurrencyproject.core.utils.showToast
 import com.zahrahosseini.cryptocurrencyproject.feature_market.presentation.compose_view.MarketScreen
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
@@ -22,6 +25,20 @@ class MarketFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         mContext = requireContext()
+
+        lifecycleScope.launch {
+            launch {
+                viewModel.errorMessage.collect {
+                    mContext.showToast(it)
+                }
+            }
+            launch {
+                viewModel.errorException.collectLatest {
+                    mContext.handleExceptions(it)
+                }
+            }
+
+        }
 
     }
 
