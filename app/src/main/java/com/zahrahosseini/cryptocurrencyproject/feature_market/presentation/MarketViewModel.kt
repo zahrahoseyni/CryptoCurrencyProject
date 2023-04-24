@@ -1,5 +1,6 @@
 package com.zahrahosseini.cryptocurrencyproject.feature_market.presentation
 
+import androidx.compose.runtime.mutableStateListOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.zahrahosseini.cryptocurrencyproject.core.utils.network.ApiResult
@@ -21,6 +22,9 @@ class MarketViewModel @Inject constructor(
     private val _marketCoinsResult = MutableStateFlow<List<CoinListResponse>>(emptyList())
     val marketCoinsResult: StateFlow<List<CoinListResponse>>
         get() = _marketCoinsResult
+
+    val coinListResponses =
+        mutableStateListOf<CoinListResponse>()
 
     private val _loading = MutableStateFlow(false)
     val loading: StateFlow<Boolean>
@@ -46,7 +50,7 @@ class MarketViewModel @Inject constructor(
                         this.errorBody?.status?.let { _errorMessage.emit(it) }
                     }
                     is ApiResult.Success -> {
-                        _marketCoinsResult.value = this.data
+                        coinListResponses.addAll(this.data)
                     }
                     else -> {}
                 }

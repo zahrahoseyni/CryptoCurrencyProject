@@ -17,6 +17,8 @@ data class DesignSystem(
 
     val DefaultPositive: Color = Green,
     val DefaultNegative: Color = Red,
+    val Primary: Color = Purple10,
+
 
     val Neutral00: Color = Gray00,
     val Neutral05: Color = Gray05,

@@ -1,12 +1,10 @@
 package com.zahrahosseini.cryptocurrencyproject.feature_market.presentation.compose_view
 
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.wrapContentHeight
+import androidx.compose.foundation.layout.*
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
@@ -84,20 +82,22 @@ fun MarketItemList(coin: CoinListResponse) {
             }
         )
 
+        Box(modifier = Modifier
+            .constrainAs(txChangePercent) {
+                top.linkTo(parent.top)
+                bottom.linkTo(parent.bottom)
+                start.linkTo(parent.start)
+            }
+            .bgRounded5ChangeNumber(coin.changePercent.toDouble()),
+            Alignment.Center
+        ) {
+            Text(
+                text = "${DecimalFormat("0.##").format(abs(coin.changePercent.toDouble()))}%",
+                color = MaterialTheme.cryptoCurrencyColors.designSystem.Neutral00,
+                style = TextStyle(fontWeight = FontWeight.Bold, fontSize = 14.sp)
+            )
+        }
 
-        Text(
-            text = "${DecimalFormat("0.##").format(abs(coin.changePercent.toDouble()))}%",
-            color = MaterialTheme.cryptoCurrencyColors.designSystem.Neutral00,
-            style = TextStyle(fontWeight = FontWeight.Bold, fontSize = 16.sp),
-            modifier = Modifier
-                .constrainAs(txChangePercent) {
-                    top.linkTo(parent.top)
-                    bottom.linkTo(parent.bottom)
-                    start.linkTo(parent.start)
-                }
-                .bgRounded5ChangeNumber(coin.changePercent.toDouble())
-
-        )
 
     }
 }
