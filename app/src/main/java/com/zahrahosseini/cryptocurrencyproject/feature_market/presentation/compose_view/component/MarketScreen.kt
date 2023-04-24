@@ -46,7 +46,7 @@ fun MarketScreen(viewModel: MarketViewModel) {
     LaunchedEffect(Unit) {
         while(true) {
             viewModel.getMarketCoinsList()
-            delay(30000)
+            delay(10000)
         }
     }
 

@@ -46,9 +46,10 @@ class MarketViewModel @Inject constructor(
                         this.errorBody?.status?.let { _errorMessage.emit(it) }
                     }
                     is ApiResult.Success -> {
-                        Log.d("dshvf","hgdsfhsdjaf")
+                        Log.d("size of the list",coinListResponses.size.toString())
                         if (isRefreshing.value)
                             _isRefreshing.value = false
+                        coinListResponses.clear()
                         coinListResponses.addAll(this.data)
                     }
                     else -> {}
