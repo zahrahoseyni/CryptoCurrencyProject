@@ -4,6 +4,6 @@ import com.zahrahosseini.cryptocurrencyproject.feature_market.domain.entity.Coin
 import retrofit2.Response
 
 interface MarketRepository {
-    suspend fun getCoinsList(): Response<CoinListResponse>
+    suspend fun getCoinsList(): Response<List<CoinListResponse>>
 
 }

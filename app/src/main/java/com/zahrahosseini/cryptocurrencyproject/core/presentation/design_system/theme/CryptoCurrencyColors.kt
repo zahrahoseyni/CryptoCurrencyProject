@@ -2,6 +2,8 @@ package com.zahrahosseini.cryptocurrencyproject.core.presentation.design_system.
 
 import androidx.compose.material3.ColorScheme
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Color.Companion.Green
+import androidx.compose.ui.graphics.Color.Companion.Red
 
 
 data class CryptoCurrencyColors(
@@ -12,6 +14,9 @@ data class CryptoCurrencyColors(
 )
 
 data class DesignSystem(
+
+    val DefaultPositive: Color = Green,
+    val DefaultNegative: Color = Red,
 
     val Neutral00: Color = Gray00,
     val Neutral05: Color = Gray05,

@@ -13,7 +13,7 @@ class MarketRepositoryImpl @Inject constructor(
     private val marketApi: MarketApi,
     private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO
 ) : MarketRepository {
-    override suspend fun getCoinsList(): Response<CoinListResponse> =
+    override suspend fun getCoinsList(): Response<List<CoinListResponse>> =
         withContext(ioDispatcher) {
             marketApi.getCoinsList()
         }

@@ -7,6 +7,6 @@ import retrofit2.http.GET
 interface MarketApi {
 
     @GET("currency_prices/")
-    suspend fun getCoinsList(): Response<CoinListResponse>
+    suspend fun getCoinsList(): Response<List<CoinListResponse>>
 
 }

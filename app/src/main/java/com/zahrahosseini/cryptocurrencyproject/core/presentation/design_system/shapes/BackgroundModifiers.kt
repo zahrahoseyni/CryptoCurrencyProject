@@ -9,6 +9,7 @@ import androidx.compose.ui.composed
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
 import com.zahrahosseini.cryptocurrencyproject.core.presentation.design_system.theme.cryptoCurrencyColors
+import com.zahrahosseini.cryptocurrencyproject.core.utils.compose.changeNumberToColor
 
 fun Modifier.bgRounded20WhiteStrokeNeutral15() = composed {
     this.then(
@@ -22,5 +23,14 @@ fun Modifier.bgRounded20WhiteStrokeNeutral15() = composed {
             .background(
                 color = MaterialTheme.cryptoCurrencyColors.designSystem.Neutral00,
             )
+    )
+}
+
+fun Modifier.bgRounded5ChangeNumber(number: Double) = composed {
+    this.then(
+        this.background(
+            shape = RoundedCornerShape(5.dp),
+            color = changeNumberToColor(number)
+        )
     )
 }
