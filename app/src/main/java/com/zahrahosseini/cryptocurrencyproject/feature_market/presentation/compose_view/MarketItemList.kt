@@ -15,14 +15,17 @@ import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import com.zahrahosseini.cryptocurrencyproject.core.presentation.design_system.shapes.bgRounded5ChangeNumber
 import com.zahrahosseini.cryptocurrencyproject.core.presentation.design_system.theme.cryptoCurrencyColors
+import com.zahrahosseini.cryptocurrencyproject.core.utils.handleDecimal
 import com.zahrahosseini.cryptocurrencyproject.feature_market.domain.entity.CoinListResponse
+import java.text.DecimalFormat
+import kotlin.math.abs
 
 @Composable
 fun MarketItemList(coin: CoinListResponse) {
 
     ConstraintLayout(
         modifier = Modifier
-            .padding(16.dp)
+            .padding(8.dp)
             .fillMaxWidth()
             .wrapContentHeight()
     ) {
@@ -35,7 +38,9 @@ fun MarketItemList(coin: CoinListResponse) {
                     top.linkTo(parent.top)
                     bottom.linkTo(parent.bottom)
                     end.linkTo(parent.end)
-                })
+                }
+                .size(50.dp)
+        )
 
 
         Text(
@@ -59,7 +64,7 @@ fun MarketItemList(coin: CoinListResponse) {
         )
 
         Text(
-            text = "${coin.usdtVolume} USDT",
+            text = "${coin.usdtVolume.toDouble().handleDecimal()} USDT",
             color = MaterialTheme.cryptoCurrencyColors.designSystem.Neutral45,
             style = TextStyle(fontWeight = FontWeight.Bold, fontSize = 16.sp),
             modifier = Modifier.constrainAs(txtVolume) {
@@ -70,7 +75,7 @@ fun MarketItemList(coin: CoinListResponse) {
 
 
         Text(
-            text = "${coin.priceInUsdt} تومان",
+            text = "≈ ${coin.priceInUsdt.toDouble().handleDecimal()} تومان",
             color = MaterialTheme.cryptoCurrencyColors.designSystem.Neutral35,
             style = TextStyle(fontWeight = FontWeight.Normal, fontSize = 16.sp),
             modifier = Modifier.constrainAs(txtPrice) {
@@ -81,7 +86,7 @@ fun MarketItemList(coin: CoinListResponse) {
 
 
         Text(
-            text = "${coin.changePercent}%",
+            text = "${DecimalFormat("0.##").format(abs(coin.changePercent.toDouble()))}%",
             color = MaterialTheme.cryptoCurrencyColors.designSystem.Neutral00,
             style = TextStyle(fontWeight = FontWeight.Bold, fontSize = 16.sp),
             modifier = Modifier

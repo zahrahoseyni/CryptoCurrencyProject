@@ -2,6 +2,7 @@ package com.zahrahosseini.cryptocurrencyproject.core.presentation.design_system.
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.ui.Modifier
@@ -28,9 +29,11 @@ fun Modifier.bgRounded20WhiteStrokeNeutral15() = composed {
 
 fun Modifier.bgRounded5ChangeNumber(number: Double) = composed {
     this.then(
-        this.background(
-            shape = RoundedCornerShape(5.dp),
-            color = changeNumberToColor(number)
-        )
+        this
+            .background(
+                shape = RoundedCornerShape(5.dp),
+                color = changeNumberToColor(number)
+            )
+            .padding(5.dp)
     )
 }
