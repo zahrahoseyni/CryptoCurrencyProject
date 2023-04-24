@@ -1,6 +1,5 @@
-package com.zahrahosseini.cryptocurrencyproject.feature_market.presentation.compose_view
+package com.zahrahosseini.cryptocurrencyproject.feature_market.presentation.compose_view.component
 
-import android.util.Log
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.ExperimentalMaterialApi
@@ -20,6 +19,9 @@ import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import com.zahrahosseini.cryptocurrencyproject.R
 import com.zahrahosseini.cryptocurrencyproject.feature_market.presentation.MarketViewModel
+import com.zahrahosseini.cryptocurrencyproject.feature_market.presentation.compose_view.MarketItemList
+import com.zahrahosseini.cryptocurrencyproject.feature_market.presentation.compose_view.SearchBox
+import com.zahrahosseini.cryptocurrencyproject.feature_market.presentation.compose_view.shimmer.ShimmerAnimation
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterialApi::class)
@@ -31,6 +33,7 @@ fun MarketScreen(viewModel: MarketViewModel) {
 
     val refreshScope = rememberCoroutineScope()
     val refreshing = viewModel.isRefreshing.collectAsState()
+    val loading = viewModel.isLoading.collectAsState()
 
     fun refresh() = refreshScope.launch {
         viewModel._isRefreshing.value = true
@@ -61,7 +64,7 @@ fun MarketScreen(viewModel: MarketViewModel) {
             Modifier.constrainAs(searchBox) {
                 start.linkTo(parent.start)
                 end.linkTo(parent.end)
-                top.linkTo(txtHeader.bottom , 12.dp)
+                top.linkTo(txtHeader.bottom, 12.dp)
             },
             text = searchText
         )
@@ -85,22 +88,32 @@ fun MarketScreen(viewModel: MarketViewModel) {
                 verticalArrangement = Arrangement.spacedBy(16.dp),
             ) {
 
+                if (loading.value) {
 
-                if (searchText.value == "") {
-                    marketCoinsList
-                } else {
-                    marketCoinsList.filter {
-                        it.name.lowercase().contains(searchText.value.lowercase()) ||
-                                it.symbol.lowercase().contains(searchText.value.lowercase()) ||
-                                it.nameFa.lowercase().contains(searchText.value.lowercase())
+                    repeat(10) {
+                        item {
+                            ShimmerAnimation()
 
+                        }
                     }
-                }.forEach { item ->
+                } else {
+                    if (searchText.value == "") {
+                        marketCoinsList
+                    } else {
+                        marketCoinsList.filter {
+                            it.name.lowercase().contains(searchText.value.lowercase()) ||
+                                    it.symbol.lowercase().contains(searchText.value.lowercase()) ||
+                                    it.nameFa.lowercase().contains(searchText.value.lowercase())
 
-                    item {
-                        MarketItemList(coin = item)
+                        }
+                    }.forEach { item ->
+
+                        item {
+                            MarketItemList(coin = item)
+                        }
                     }
                 }
+
                 item {
                     Spacer(modifier = Modifier.size(32.dp))
                 }

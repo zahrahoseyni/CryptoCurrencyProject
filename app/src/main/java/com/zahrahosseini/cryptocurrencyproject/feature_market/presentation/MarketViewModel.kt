@@ -23,9 +23,8 @@ class MarketViewModel @Inject constructor(
     val coinListResponses =
         mutableStateListOf<CoinListResponse>()
 
-    private val _loading = MutableStateFlow(false)
-    val loading: StateFlow<Boolean>
-        get() = _loading
+    private val _isLoading = MutableStateFlow(false)
+    val isLoading = _isLoading.asStateFlow()
 
     private val _errorMessage = MutableSharedFlow<String>()
     val errorMessage: SharedFlow<String>
@@ -36,10 +35,10 @@ class MarketViewModel @Inject constructor(
         get() = _errorException
 
     fun getMarketCoinsList() {
-        _loading.value = true
+        _isLoading.value = true
         viewModelScope.launch {
             marketCoinListUseCase(Unit).run {
-                _loading.value = false
+                _isLoading.value = false
                 when (this) {
                     is ApiResult.Error -> {
                         _errorException.emit(this.exception)

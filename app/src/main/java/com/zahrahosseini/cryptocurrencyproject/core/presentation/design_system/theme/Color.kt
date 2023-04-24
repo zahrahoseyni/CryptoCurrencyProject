@@ -26,6 +26,12 @@ val Gray40 = Color(0xFF262626)
 val Gray45 = Color(0xFF1F1F1F)
 val Gray50 = Color(0xFF141414)
 
+val ShimmerColorShades = listOf(
+    Color.LightGray.copy(0.9f),
+    Color.LightGray.copy(0.2f),
+    Color.LightGray.copy(0.9f)
+)
+
 
 
 

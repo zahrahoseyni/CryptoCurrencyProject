@@ -11,7 +11,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.zahrahosseini.cryptocurrencyproject.core.utils.handleExceptions
 import com.zahrahosseini.cryptocurrencyproject.core.utils.showToast
-import com.zahrahosseini.cryptocurrencyproject.feature_market.presentation.compose_view.MarketScreen
+import com.zahrahosseini.cryptocurrencyproject.feature_market.presentation.compose_view.component.MarketScreen
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
