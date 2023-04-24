@@ -27,4 +27,5 @@ ext {
     coroutines_version = "1.6.4"
     compose_version = "1.4.1"
     retrofit_version = "2.9.0"
+    paging_version = "3.1.1"
 }

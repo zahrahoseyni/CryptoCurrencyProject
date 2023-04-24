@@ -20,8 +20,7 @@ class MarketViewModel @Inject constructor(
     val _isRefreshing = MutableStateFlow(false)
     val isRefreshing = _isRefreshing.asStateFlow()
 
-    val coinListResponses =
-        mutableStateListOf<CoinListResponse>()
+    val coinListResponses = mutableStateListOf<CoinListResponse>()
 
     private val _isLoading = MutableStateFlow(false)
     val isLoading = _isLoading.asStateFlow()
@@ -47,6 +46,7 @@ class MarketViewModel @Inject constructor(
                         this.errorBody?.status?.let { _errorMessage.emit(it) }
                     }
                     is ApiResult.Success -> {
+                        Log.d("dshvf","hgdsfhsdjaf")
                         if (isRefreshing.value)
                             _isRefreshing.value = false
                         coinListResponses.addAll(this.data)

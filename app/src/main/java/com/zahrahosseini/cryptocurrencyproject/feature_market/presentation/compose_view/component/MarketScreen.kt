@@ -22,6 +22,7 @@ import com.zahrahosseini.cryptocurrencyproject.feature_market.presentation.Marke
 import com.zahrahosseini.cryptocurrencyproject.feature_market.presentation.compose_view.MarketItemList
 import com.zahrahosseini.cryptocurrencyproject.feature_market.presentation.compose_view.SearchBox
 import com.zahrahosseini.cryptocurrencyproject.feature_market.presentation.compose_view.shimmer.ShimmerAnimation
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterialApi::class)
@@ -42,6 +43,12 @@ fun MarketScreen(viewModel: MarketViewModel) {
 
     val state = rememberPullRefreshState(refreshing.value, ::refresh)
 
+    LaunchedEffect(Unit) {
+        while(true) {
+            viewModel.getMarketCoinsList()
+            delay(30000)
+        }
+    }
 
     ConstraintLayout(modifier = Modifier.padding(bottom = 30.dp)) {
         val (txtHeader, cmpList, searchBox) = createRefs()
