@@ -1,11 +1,19 @@
 package com.zahrahosseini.cryptocurrencyproject.feature_market.domain.entity
 
 import android.os.Parcelable
+import androidx.annotation.NonNull
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-data class CoinListResponse(
+@Entity(tableName = "market")
+data class CoinListItem(
+
+    @PrimaryKey(autoGenerate = false)
+    @ColumnInfo(name = "id")
     val id: Int,
     val name: String,
     @SerializedName("name_fa")

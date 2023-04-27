@@ -14,12 +14,12 @@ import androidx.constraintlayout.compose.ConstraintLayout
 import com.zahrahosseini.cryptocurrencyproject.core.presentation.design_system.shapes.bgRounded5ChangeNumber
 import com.zahrahosseini.cryptocurrencyproject.core.presentation.design_system.theme.cryptoCurrencyColors
 import com.zahrahosseini.cryptocurrencyproject.core.utils.handleDecimal
-import com.zahrahosseini.cryptocurrencyproject.feature_market.domain.entity.CoinListResponse
+import com.zahrahosseini.cryptocurrencyproject.feature_market.domain.entity.CoinListItem
 import java.text.DecimalFormat
 import kotlin.math.abs
 
 @Composable
-fun MarketItemList(coin: CoinListResponse) {
+fun MarketItemList(coin: CoinListItem) {
 
     ConstraintLayout(
         modifier = Modifier

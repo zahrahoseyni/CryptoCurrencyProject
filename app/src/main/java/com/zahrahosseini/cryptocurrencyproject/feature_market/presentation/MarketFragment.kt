@@ -1,7 +1,9 @@
 package com.zahrahosseini.cryptocurrencyproject.feature_market.presentation
 
+import android.content.ContentValues.TAG
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -40,6 +42,8 @@ class MarketFragment : Fragment() {
 
         }
 
+        readCachedData()
+
     }
 
     override fun onCreateView(
@@ -53,6 +57,18 @@ class MarketFragment : Fragment() {
         return ComposeView(requireContext()).apply {
             setContent {
                 MarketScreen(viewModel = viewModel)
+            }
+        }
+    }
+
+    private fun readCachedData() {
+        lifecycleScope.launch {
+            viewModel.readMarket.observe(viewLifecycleOwner) { dataBase ->
+                if (dataBase.isNotEmpty()) {
+                    Log.d("readCachedData:() ", dataBase.get(0).coinList.results.size.toString())
+                } else {                                               // in case database is empty
+                    // requestApiData()
+                }
             }
         }
     }
