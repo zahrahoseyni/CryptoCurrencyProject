@@ -11,6 +11,7 @@ import androidx.compose.ui.platform.ComposeView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.zahrahosseini.cryptocurrencyproject.core.utils.handleExceptions
 import com.zahrahosseini.cryptocurrencyproject.core.utils.showToast
 import com.zahrahosseini.cryptocurrencyproject.feature_market.presentation.compose_view.component.MarketScreen
@@ -65,9 +66,12 @@ class MarketFragment : Fragment() {
         lifecycleScope.launch {
             viewModel.readMarket.observe(viewLifecycleOwner) { dataBase ->
                 if (dataBase.isNotEmpty()) {
-                    Log.d("readCachedData:() ", dataBase.get(0).coinList.results.size.toString())
-                } else {                                               // in case database is empty
-                    // requestApiData()
+                    Log.d("readCachedData:() ", dataBase[0].coinList.results.size.toString())
+                    viewModel.coinListResponses.clear()
+                    viewModel.coinListResponses.addAll( dataBase[0].coinList.results.subList(0,5))
+
+                } else {
+                     viewModel.getMarketCoinsList()
                 }
             }
         }

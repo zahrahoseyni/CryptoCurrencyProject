@@ -60,8 +60,6 @@ class MarketViewModel @Inject constructor(
                         Log.d("size of the list", coinListResponses.size.toString())
                         if (isRefreshing.value)
                             _isRefreshing.value = false
-                        coinListResponses.clear()
-                        coinListResponses.addAll(this.data)
                         insert(MarketEntity(CoinList(this.data)))
                     }
                     else -> {}
